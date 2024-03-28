@@ -1,0 +1,25 @@
+<div id="wrapper">
+    <mat-card class="box login-card">
+        <mat-card-title id="login-title">
+            <h2>Login</h2>
+        </mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="loginForm" (ngSubmit)="submit()">
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput placeholder="abc@xyz.com" formControlName="email" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                <input type="password" matInput placeholder="Password" formControlName="password" required>
+                </mat-form-field>
+                <div id="action-button">
+                    <button type="submit" mat-flat-button>Login</button>
+                    @if(false) {
+                        <mat-error>asbfjashj</mat-error>
+                    }
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

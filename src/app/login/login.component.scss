@@ -1,0 +1,29 @@
+#wrapper {
+    height: calc(100vh - 16px);
+    width: 100%;
+    display: flex;
+    background-image: linear-gradient(180deg, #d4eaff 0%, #005cbb 100%);}
+
+
+#login-title {
+    padding: 16px;
+}
+
+mat-form-field {
+    display: block;
+}
+
+#action-button {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    mat-error {
+        margin-left: 16px;
+    }
+}
+
+.login-card {
+    width: 50%;
+    min-width: 300px;
+    margin: auto;
+}
