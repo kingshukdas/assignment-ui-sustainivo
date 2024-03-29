@@ -15,15 +15,5 @@ export const routes: Routes = [
         path: 'register-user',
         loadComponent: () => import('./register/register.component')
         .then(mod => mod.RegisterComponent)
-    }, 
-    {
-        path: 'add',
-        loadComponent: () => import('./add-edit/add-edit.component')
-        .then(mod => mod.AddEditComponent)
-    }, 
-    {
-        path: 'edit',
-        loadComponent: () => import('./add-edit/add-edit.component')
-        .then(mod => mod.AddEditComponent)
-    } 
+    }
 ];

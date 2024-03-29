@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SharedModule } from '../shared.module';
 import { FormControl } from '@angular/forms';
+import { AddEditComponent } from '../add-edit/add-edit.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-landing',
@@ -12,6 +14,8 @@ import { FormControl } from '@angular/forms';
 export class LandingComponent {
   gridColumns = 4;
   colorControl = new FormControl('ascending');
+
+  public dialog = inject(MatDialog);
 
   formatLabel(value: number): string {
     if (value >= 1000) {
@@ -25,6 +29,10 @@ export class LandingComponent {
   }
 
   addProduct() {
+    const dialogRef = this.dialog.open(AddEditComponent);
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
