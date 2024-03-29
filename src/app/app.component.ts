@@ -11,6 +11,4 @@ import { SharedModule } from './shared.module';
 })
 export class AppComponent {
   title = 'assignment-ui-sustainivo';
-
-  logout() {}
 }

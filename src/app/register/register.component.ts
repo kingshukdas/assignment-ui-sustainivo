@@ -24,6 +24,10 @@ export class RegisterComponent implements OnInit{
     })
   }
 
+  login() {
+    
+  }
+
   submit() {
 
   }

@@ -5,7 +5,12 @@
 }
 
 .login-card {
-    width: 50%;
+    width: 30%;
     min-width: 300px;
     margin: auto;
+}
+
+#login-toolbar {
+    display: flex;
+    justify-content: space-between;
 }

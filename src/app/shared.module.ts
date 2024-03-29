@@ -36,6 +36,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import { MatDialogModule } from '@angular/material/dialog'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http';
 
 
 const materialModules = [
@@ -80,6 +81,7 @@ const materialModules = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     ...materialModules
   ],
   exports: [
@@ -87,6 +89,7 @@ const materialModules = [
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    HttpClientModule,
     ...materialModules
   ],
 })
