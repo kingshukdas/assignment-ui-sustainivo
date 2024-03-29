@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { SharedModule } from '../shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({

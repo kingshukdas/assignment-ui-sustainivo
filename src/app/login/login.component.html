@@ -1,7 +1,7 @@
 <mat-toolbar id="login-toolbar" class="main">
     <span>Sustainivo</span>
-        <button mat-raised-button (click)="register()" fxHide.lt-md>
-          Register
+        <button mat-raised-button fxHide.lt-md routerLink="/register-user">
+            Register
         </button>
 </mat-toolbar>
 <div id="wrapper">
@@ -20,10 +20,16 @@
                 <input type="password" matInput placeholder="Password" formControlName="password" required>
                 </mat-form-field>
                 <div id="action-button">
-                    <button type="submit" mat-flat-button>Login</button>
-                    @if(false) {
-                        <mat-error>asbfjashj</mat-error>
+                    @if(showInvalidCredsMsg) {
+                        <mat-error>{{ errorMsg }}</mat-error>
                     }
+                    @if(showUserNotFound) {
+                        <span>
+                            <mat-error>User nor found! </mat-error>
+                            <a routerLink="/register-user">Register here!</a>
+                        </span>
+                    }
+                    <button type="submit" mat-flat-button>Login</button>
                 </div>
             </form>
         </mat-card-content>

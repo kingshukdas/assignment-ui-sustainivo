@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { SharedModule } from '../shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { FormControl } from '@angular/forms';
 import { AddEditComponent } from '../add-edit/add-edit.component';
 import { MatDialog } from '@angular/material/dialog';
