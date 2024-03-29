@@ -21,16 +21,17 @@
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Password</mat-label>
-                <input type="password" matInput placeholder="password" formControlName="password" required>
+                <input type="password" matInput placeholder="password to be >= 5 characters" formControlName="password" required>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Re-type Password</mat-label>
                 <input type="password" matInput placeholder="re-type password" formControlName="repassword" required>
                 </mat-form-field>
                 <div id="action-button">
-                    @if(false) {
-                        <mat-error>asbfjashj</mat-error>
+                    @if(showInvalidDataMsg || showUserCannotBeAdded) {
+                        <mat-error>{{ errorMsg }}</mat-error>
                     }
+                    <button class="reset" type="reset" mat-stroked-button>Reset</button>
                     <button type="submit" mat-flat-button color="primary">Register</button>
                 </div>
             </form>
