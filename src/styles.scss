@@ -3,6 +3,7 @@
 
 $theme-primary: #005cbb;
 $theme-secondary: #d4eaff;
+$toolbar-box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, .2), 0px 1px 1px 0px rgba(0, 0, 0, .14), 0px 1px 3px 0px rgba(0, 0, 0, .12);
 
 #wrapper {
     height: calc(100vh - 16px);
@@ -24,7 +25,14 @@ mat-form-field {
     display: block;
 }
 
-mat-toolbar {
+mat-toolbar.main {
     background-color: $theme-primary !important;
     color: #fff !important;
+    box-shadow: $toolbar-box-shadow;
+    height: 100px;
+}
+mat-toolbar.sub {
+    background-color: #fff !important;
+    color: $theme-primary !important;
+    box-shadow: $toolbar-box-shadow;
 }

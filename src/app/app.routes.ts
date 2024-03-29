@@ -7,11 +7,6 @@ export const routes: Routes = [
         .then(mod => mod.LoginComponent)
     }, 
     {
-        path: '**',
-        loadComponent: () => import('./login/login.component')
-        .then(mod => mod.LoginComponent)
-    }, 
-    {
         path: 'landing',
         loadComponent: () => import('./landing/landing.component')
         .then(mod => mod.LandingComponent)
