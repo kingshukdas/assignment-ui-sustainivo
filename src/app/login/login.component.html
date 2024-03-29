@@ -24,11 +24,11 @@
                         <mat-error>{{ errorMsg }}</mat-error>
                     }
                     @if(showUserNotFound) {
-                        <span>
-                            <mat-error>User nor found! </mat-error>
-                            <a routerLink="/register-user">Register here!</a>
-                        </span>
+                            <mat-error>{{ errorMsg }} 
+                                <a routerLink="/register-user">Register here!</a> 
+                            </mat-error>
                     }
+                    <button class="reset" type="reset" mat-stroked-button>Reset</button>
                     <button type="submit" mat-flat-button>Login</button>
                 </div>
             </form>

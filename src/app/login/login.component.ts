@@ -1,11 +1,16 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { LoginService } from '../shared/login.service';
+import { LoginPayload, LoginResponse } from '../shared/app.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ SharedModule ],
+  providers: [ LoginService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -16,7 +21,11 @@ export class LoginComponent implements OnInit{
   showUserNotFound = false;
   errorMsg = '';
 
+  loginSub!: Subscription;
+
   private fb = inject(FormBuilder);
+  private loginService = inject(LoginService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -42,6 +51,20 @@ export class LoginComponent implements OnInit{
         return;
       } else {
         this.showInvalidCredsMsg = false;
+        const payload : LoginPayload = {
+          login: true,
+          email: this.loginForm.controls['email'].value,
+          password: this.loginForm.controls['password'].value
+        };
+        this.loginSub = this.loginService.login(payload).subscribe((res: LoginResponse) => {
+          if(res.status === 'error') {
+            this.showUserNotFound = true;
+            this.errorMsg = res.message;
+          } else {
+            sessionStorage.setItem('login', 'true');
+            this.router.navigate(['landing']);
+          }
+        });
       }
     }
   }
