@@ -1,3 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+$theme-primary: #005cbb;
+$theme-secondary: #d4eaff;
+
+#wrapper {
+    height: calc(100vh - 16px);
+    width: 100%;
+    display: flex;
+    background-image: linear-gradient(180deg, $theme-primary 0%, $theme-secondary 100%);
+}
+
+#action-button {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    mat-error {
+        margin-right: 20px;
+    }
+}
+
+mat-form-field {
+    display: block;
+}
+
+mat-toolbar {
+    background-color: $theme-primary !important;
+    color: #fff !important;
+}

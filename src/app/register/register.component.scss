@@ -1,25 +1,8 @@
-#wrapper {
-    height: calc(100vh - 16px);
-    width: 100%;
-    display: flex;
-    background-image: linear-gradient(180deg, #d4eaff 0%, #005cbb 100%);}
+@import '../../styles.scss';
 
 
 #register-title {
     padding: 16px;
-}
-
-mat-form-field {
-    display: block;
-}
-
-#action-button {
-    margin-top: 20px;
-    display: flex;
-    justify-content: flex-end;
-    mat-error {
-        margin-right: 20px;
-    }
 }
 
 .register-card {
