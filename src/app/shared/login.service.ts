@@ -20,4 +20,12 @@ export class LoginService {
   register(payload: RegistrationPayload) {
     return this.http.post<RegistrationResponse>(this.userUrl,payload);
   }
+
+  setLoggedIn() {
+    sessionStorage.setItem('login', 'true');
+  }
+
+  setLoggedOut() {
+    sessionStorage.setItem('login', 'false');
+  }
 }

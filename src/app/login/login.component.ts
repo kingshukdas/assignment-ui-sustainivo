@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit{
             this.showUserNotFound = true;
             this.errorMsg = res.message;
           } else {
-            sessionStorage.setItem('login', 'true');
+            this.loginService.setLoggedIn();
             this.router.navigate(['landing']);
           }
         });
