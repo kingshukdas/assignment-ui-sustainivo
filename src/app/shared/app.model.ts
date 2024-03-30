@@ -53,7 +53,7 @@ export interface ListProduct {
     product_name: string;
     image: string;
     description: string;
-    price: string;
+    price: number;
     del_status: string
 }
 

@@ -27,3 +27,13 @@
 .content {
     padding: 20px;
 }
+
+img.fallback {
+    background-image: url('https://rukminim2.flixcart.com/image/416/416/xif0q/computer/n/o/s/-original-imaghzah9mjvukjz.jpeg');
+    background-size: contain;
+    height: 250px;
+}
+
+#card-actions {
+    padding-left: 16px !important;
+}

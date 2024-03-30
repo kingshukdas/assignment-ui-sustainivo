@@ -8,8 +8,7 @@ import { LoginPayload, LoginResponse, RegistrationPayload, RegistrationResponse 
 export class LoginService {
 
   userUrl = 'http://206.189.13.18/api/v1/user/index.php';
-  productUrl = 'http://206.189.13.18/api/v1/product/index.php';
-  uploadImgUrl = 'http://206.189.13.18/api/v1/product/upload.php';
+
 
   constructor(private http: HttpClient) { }
 
