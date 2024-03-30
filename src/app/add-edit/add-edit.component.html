@@ -1,10 +1,12 @@
 <h2 mat-dialog-title>{{ data.title }}</h2>
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="productForm"  (ngSubmit)="submit()">
-    <mat-form-field>
-      <mat-label>id</mat-label>
-      <input type="text" matInput placeholder="id" formControlName="id" required>
-    </mat-form-field>
+    @if(data.product) {
+      <mat-form-field>
+        <mat-label>id</mat-label>
+        <input type="text" matInput placeholder="id" formControlName="id" required>
+      </mat-form-field>
+    }
     <mat-form-field>
       <mat-label>name</mat-label>
       <input type="text" matInput placeholder="product name" formControlName="name" required>

@@ -42,7 +42,7 @@ export class AddEditComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.product) {
       this.productForm = this.fb.group({
-        id: new FormControl(this.data.product.product_id),
+        id: new FormControl({value: this.data.product.product_id, disabled: true}),
         name: new FormControl(this.data.product.product_name),
         description: new FormControl(this.data.product.description),
         price: new FormControl(this.data.product.price, [Validators.max(100000)]),
@@ -50,7 +50,6 @@ export class AddEditComponent implements OnInit {
       })
     } else {
       this.productForm = this.fb.group({
-        id: new FormControl(''),
         name: new FormControl(''),
         description: new FormControl(''),
         price: new FormControl('', [Validators.max(100000)]),
@@ -65,7 +64,7 @@ export class AddEditComponent implements OnInit {
     const description = this.productForm.controls['description'];
     const price = this.productForm.controls['price'];
     const fileUrl = this.productForm.controls['fileUrl'];
-    if(id.value && name.value && description.value && price.value && fileUrl.value) {
+    if(name.value && description.value && price.value && fileUrl.value) {
       if(price.value && price.invalid) {
         this.showError = true;
         this.errorMsg = "Enter the price in range"
