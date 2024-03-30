@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit{
   showInvalidCredsMsg = false;
   showUserNotFound = false;
   errorMsg = '';
+  load = false;
 
   loginSub!: Subscription;
 
@@ -49,6 +50,7 @@ export class LoginComponent implements OnInit{
         this.errorMsg = 'Invalid email or password.';
         return;
       } else {
+        this.load = true;
         this.showInvalidCredsMsg = false;
         const payload : LoginPayload = {
           login: true,
@@ -57,11 +59,13 @@ export class LoginComponent implements OnInit{
         };
         this.loginSub = this.loginService.login(payload).subscribe((res: LoginResponse) => {
           if(res.status === 'error') {
+            this.load = false;
             this.showUserNotFound = true;
             this.errorMsg = res.message;
           } else {
             this.loginService.setLoggedIn();
             this.router.navigate(['landing']);
+            this.load = false;
           }
         });
       }

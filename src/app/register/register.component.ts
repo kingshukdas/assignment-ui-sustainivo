@@ -5,6 +5,7 @@ import { RegistrationPayload, RegistrationResponse } from '../shared/app.model';
 import { Subscription } from 'rxjs';
 import { LoginService } from '../shared/login.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,10 @@ export class RegisterComponent implements OnInit{
   private fb = inject(FormBuilder);
   private loginService = inject(LoginService);
   private router = inject(Router);
+  private _snackBar = inject(MatSnackBar);
+
   showUserCannotBeAdded: boolean = false;
+  load = false;
 
   ngOnInit(): void {
     
@@ -62,6 +66,7 @@ export class RegisterComponent implements OnInit{
         this.showInvalidDataMsg = true;
         this.errorMsg = 'Passwords do not match';
       } else {
+        this.load = true;
         this.showInvalidDataMsg = false;
         const payload : RegistrationPayload = {
           user_name: this.registrationForm.controls['username'].value,
@@ -75,10 +80,18 @@ export class RegisterComponent implements OnInit{
             this.errorMsg = res.message;
           } else {
             this.router.navigate(['/'], );
+            this.openSnackBar(res.message + '. You can login.');
           }
+          this.load = false;
         });
       }
     }
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'Dismiss',{
+      duration: 3000
+    });
   }
 
 

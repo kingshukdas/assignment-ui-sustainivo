@@ -74,6 +74,7 @@ export class LandingComponent implements OnInit{
   }
 
   sortProducts(event: string) {
+    this.load = true;
     if(event === 'ascending') {
       this.productList.sort((a,b) => {
         return a.price - b.price;
@@ -83,9 +84,11 @@ export class LandingComponent implements OnInit{
         return b.price - a.price;
       });
     }
+    this.load = false;
   }
 
   filterProducts(range: string, value: number) {
+    this.load = true;
     if(range === 'lower-range') {
       this.productList = this.masterProductList.filter(e => e.price >= value);
     } else {

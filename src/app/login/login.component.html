@@ -6,32 +6,38 @@
 </mat-toolbar>
 <div id="wrapper">
     <mat-card class="box login-card">
-        <mat-card-title id="login-title">
-            <h2>Login</h2>
-        </mat-card-title>
-        <mat-card-content>
-            <form [formGroup]="loginForm" (ngSubmit)="submit()">
-                <mat-form-field>
-                    <mat-label>Email</mat-label>
-                    <input type="email" matInput placeholder="abc@xyz.com" formControlName="email" required>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Password</mat-label>
-                <input type="password" matInput placeholder="password to be >= 5 characters" formControlName="password" required>
-                </mat-form-field>
-                <div id="action-button">
-                    @if(showInvalidCredsMsg) {
-                        <mat-error>{{ errorMsg }}</mat-error>
-                    }
-                    @if(showUserNotFound) {
-                            <mat-error>{{ errorMsg }} 
-                                <a routerLink="/register-user">Register here!</a> 
-                            </mat-error>
-                    }
-                    <button class="reset" type="reset" mat-stroked-button>Reset</button>
-                    <button type="submit" mat-flat-button>Login</button>
-                </div>
-            </form>
-        </mat-card-content>
+        @if(!load) {            
+            <mat-card-title id="login-title">
+                <h2>Login</h2>
+            </mat-card-title>
+            <mat-card-content>
+                <form [formGroup]="loginForm" (ngSubmit)="submit()">
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input type="email" matInput placeholder="abc@xyz.com" formControlName="email" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Password</mat-label>
+                    <input type="password" matInput placeholder="password to be >= 5 characters" formControlName="password" required>
+                    </mat-form-field>
+                    <div id="action-button">
+                        @if(showInvalidCredsMsg) {
+                            <mat-error>{{ errorMsg }}</mat-error>
+                        }
+                        @if(showUserNotFound) {
+                                <mat-error>{{ errorMsg }} 
+                                    <a routerLink="/register-user">Register here!</a> 
+                                </mat-error>
+                        }
+                        <button class="reset" type="reset" mat-stroked-button>Reset</button>
+                        <button type="submit" mat-flat-button>Login</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        } @else if(load) {
+            <div class="login-placeholder">
+                <mat-spinner></mat-spinner>
+            </div>  
+        }
     </mat-card>
 </div>
