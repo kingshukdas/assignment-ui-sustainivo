@@ -1,49 +1,46 @@
-<h2 mat-dialog-title>Update form</h2>
+<h2 mat-dialog-title>{{ data.title }}</h2>
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="productForm"  (ngSubmit)="submit()">
     <mat-form-field>
-        <mat-label>id</mat-label>
-        <input type="text" matInput placeholder="id" formControlName="id" required>
+      <mat-label>id</mat-label>
+      <input type="text" matInput placeholder="id" formControlName="id" required>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>name</mat-label>
-        <input type="text" matInput placeholder="product name" formControlName="name" required>
+      <mat-label>name</mat-label>
+      <input type="text" matInput placeholder="product name" formControlName="name" required>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>description</mat-label>
-    <input type="text" matInput placeholder="description" formControlName="description" required>
+      <mat-label>description</mat-label>
+      <input type="text" matInput placeholder="description" formControlName="description" required>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>price</mat-label>
-    <input type="number" matInput placeholder="Enter price" formControlName="price" required>
+      <mat-label>price</mat-label>
+      <input type="number" matInput placeholder="Enter price: price <= 100000" formControlName="price" required>
     </mat-form-field>
-        <div class="row">
-            <div class="col-8">
-              <mat-label class="btn btn-default p-0">
-                <input type="file" accept="image/*" formControlName="fileInput"/>
-              </mat-label>
-            </div>
-          
-            <div class="col-4">
-              <button
-              mat-flat-button
-                class="btn btn-success btn-sm float-right"
-                [disabled]=""
-                (click)="uploadFiles($event)"
-              >
-                Upload
-              </button>
-            </div>
-          </div>
-          
-    <div id="action-button">
-        @if(false) {
-            <mat-error>asbfjashj</mat-error>
-        }
+    <div id="image-upload-field">
+      <mat-label>
+        <input type="file" accept="image/*" (change)="setFile($event)"/>
+      </mat-label>
+      @if(imageUploading === uploadStatus.UPLOADING) {
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      } @else if (imageUploading === uploadStatus.FAILED) {
+        <mat-error>{{ imageUploadedMessage }}</mat-error>
+      }
     </div>
-</form>
+    <mat-form-field>
+      <mat-label>File URL</mat-label>
+      <input type="text" matInput placeholder="Uploaded image URL" formControlName="fileUrl" required>
+    </mat-form-field>
+  </form>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Close</button>
-  <button mat-button type="submit" [mat-dialog-close]="true" cdkFocusInitial>Update/Add</button>
+<mat-dialog-actions class="dialog-actions" align="end">
+  @if(showError) {
+    <mat-error>{{ errorMsg }}</mat-error>
+  }
+  <button mat-raised-button mat-dialog-close>Close</button>
+  @if(data.product) {
+    <button mat-raised-button type="submit" (click)="submit()" cdkFocusInitial>Update</button>
+  } @else {
+    <button mat-raised-button type="submit" (click)="submit()" cdkFocusInitial>Add</button>
+  }
 </mat-dialog-actions>

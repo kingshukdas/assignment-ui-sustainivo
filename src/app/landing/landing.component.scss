@@ -4,6 +4,14 @@
     justify-content: space-between;
 }
 
+.content-placeholder {
+    width: 100%;
+    height: calc(100vh - 104px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #landing-toolbar  {
     @extend .toolbar-content;
 }

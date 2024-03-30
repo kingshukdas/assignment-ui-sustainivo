@@ -1,1 +1,12 @@
 @import '../../styles.scss';
+
+.image-upload-field {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dialog-actions {
+    button{
+        margin-left: 16px;
+    }
+}

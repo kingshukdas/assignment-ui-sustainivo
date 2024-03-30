@@ -77,3 +77,8 @@ export interface UploadImageResponse {
     message: string;
     url: string;
 }
+
+export interface DialogData {
+    title: string;
+    product?: ListProduct;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ɵ_sanitizeUrl } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { FormControl } from '@angular/forms';
 import { AddEditComponent } from '../add-edit/add-edit.component';
@@ -6,13 +6,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginService } from '../shared/login.service';
 import { Router } from '@angular/router';
 import { ProductService } from '../shared/product.service';
-import { ListProduct, ListProductResponse } from '../shared/app.model';
+import { DialogData, ListProduct, ListProductResponse } from '../shared/app.model';
+import { DialogService } from '../shared/dialog.service';
 
 @Component({
   selector: 'app-landing',
   standalone: true,
   imports: [SharedModule],
-  providers: [ LoginService, ProductService],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss'
 })
@@ -20,23 +20,28 @@ import { ListProduct, ListProductResponse } from '../shared/app.model';
 export class LandingComponent implements OnInit{
   gridColumns = 4;
   load = true;
-  colorControl = new FormControl('ascending');
+  sortControl = new FormControl('ascending');
   masterProductList!: ListProduct[];
   productList!: ListProduct[];
 
   public dialog = inject(MatDialog);
   private loginService = inject(LoginService);
   private productService = inject(ProductService);
+  private dialogService = inject(DialogService);
   private router = inject(Router);
   fallBackImage!: string;
 
   ngOnInit(): void {
+    this.getProductsList();
+  }
+
+  getProductsList() {
     this.productService.getAllProducts({list_products: true}).subscribe((res: ListProductResponse) => {
       this.productList = res.products;
       this.masterProductList = res.products;
-      this.sortProducts('ascending');
-    })
-  }   
+      this.sortProducts(this.sortControl.value as string);
+    });
+  }
 
 
   formatLabel(value: number): string {
@@ -53,11 +58,19 @@ export class LandingComponent implements OnInit{
   }
 
   addProduct() {
-    const dialogRef = this.dialog.open(AddEditComponent);
+    const data = {
+      title: 'Add new product'
+    };
+    this.handleDialogToggle(data);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  }
+
+  updateProduct(product: ListProduct) {
+    const data = {
+      product: product,
+      title: 'Update product'
+    };
+    this.handleDialogToggle(data);
   }
 
   sortProducts(event: string) {
@@ -78,6 +91,19 @@ export class LandingComponent implements OnInit{
     } else {
       this.productList = this.masterProductList.filter(e => e.price <= value);
     }
-    this.sortProducts(this.colorControl.value as string);
+    this.sortProducts(this.sortControl.value as string);
+  }
+
+  handleDialogToggle(data: DialogData) {
+    const dialogRef = this.dialog.open(AddEditComponent, {
+      minWidth: '300px',
+      width: '40%',
+      data: data
+    });
+
+    this.dialogService.closeDialogSubject.subscribe(res => {
+      dialogRef.close();
+      this.getProductsList();
+    });
   }
 }
