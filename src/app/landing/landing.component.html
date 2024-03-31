@@ -20,7 +20,7 @@
     </p>
     <mat-slider min="0" max="100000" step="1000"  discrete [displayWith]="formatLabel">
       <input value="0" matSliderStartThumb (valueChange)="filterProducts('lower-range', $event)">
-      <input value="100000" matSliderEndThumb (valueChange)="filterProducts('higher-range', $event)">
+      <input value="100000" matSliderEndThumb (valueChange)="filterProducts('upper-range', $event)">
     </mat-slider>
     <button mat-flat-button color="acent" aria-label="Add product here" (click)="addProduct()" matTooltip="Add product">
       Add Product

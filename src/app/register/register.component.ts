@@ -47,10 +47,6 @@ export class RegisterComponent implements OnInit{
     })
   }
 
-  login() {
-    
-  }
-
   submit() {
     if(this.registrationForm.controls['password']?.untouched || this.registrationForm.controls['email']?.untouched 
     || this.registrationForm.controls['username']?.untouched || this.registrationForm.controls['repassword']?.untouched) {

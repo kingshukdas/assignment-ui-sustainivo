@@ -34,10 +34,6 @@ export class LoginComponent implements OnInit{
     })
   }
 
-  register() {
-    
-  }
-
   submit() {
     if(this.loginForm.controls['password']?.untouched || this.loginForm.controls['email']?.untouched) {
       this.showInvalidCredsMsg = true;
