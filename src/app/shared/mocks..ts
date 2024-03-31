@@ -60,6 +60,16 @@ export const updateProductResponseMock = {
     "message": "Product updated successfully"
 };
 
+export const loginResponseMock = {
+  "status": "success",
+  "message": "Login successful",
+  "data": {
+  "user_id": 2,
+  "email": "test@email.com",
+  "user_name": "Dummy Name"
+  }
+  }
+
 export const productServiceStub = {
 
   getAllProducts(payload: any) { 

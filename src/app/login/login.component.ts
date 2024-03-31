@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit{
   }
 
   submit() {
-    if(this.loginForm.controls['password']?.untouched || this.loginForm.controls['email']?.untouched) {
+    if(!this.loginForm.controls['password']?.value || !this.loginForm.controls['email']?.value) {
       this.showInvalidCredsMsg = true;
       this.errorMsg = 'Please fill all empty fields.';
       return;
