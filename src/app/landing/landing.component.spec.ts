@@ -30,7 +30,7 @@ const getProductsResponseMock = {
   "products": productList
 }
 
-class productServiceStub {
+const productServiceStub: Partial<ProductService> = {
   getAllProducts() { 
     return of(getProductsResponseMock as ListProductResponse)
   }
@@ -45,7 +45,7 @@ describe('LandingComponent', () => {
     await TestBed.configureTestingModule({
       imports: [LandingComponent],
       providers: [provideAnimations(), LoginService, 
-        {provide: ProductService, useClass: productServiceStub}
+        {provide: ProductService, useValue: productServiceStub}
       ]
     })
     .compileComponents();
@@ -137,10 +137,15 @@ describe('LandingComponent', () => {
   });
 
   it('On init users should be loaded', () => {
-    component.getProductsList(); 
+    component.getProductsList();
+    if(productServiceStub.getAllProducts) {
+      productServiceStub.getAllProducts({list_products:true}).subscribe(res => {
+        console.log(res);
+      });
+    }
     setTimeout(() => {
       expect(component.productList.length).toEqual(2);
     },3000)
+    });
   });
-});
 
