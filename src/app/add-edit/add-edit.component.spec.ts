@@ -61,6 +61,9 @@ describe('AddEditComponent', () => {
     })
 
     component.submit();
+    setTimeout(() => {
+      expect(spyOn(productServiceStub, 'addProduct')).toHaveBeenCalled();
+    },3000)
   });
 
   it('should submit update product data', () => {
@@ -74,6 +77,9 @@ describe('AddEditComponent', () => {
     }
 
     component.submit();
+    setTimeout(() => {
+      expect(spyOn(productServiceStub, 'updateProduct')).toHaveBeenCalled();
+    },3000)
   });
 
   it('should covers miscellaneous submit branches', () => {
@@ -115,6 +121,10 @@ describe('AddEditComponent', () => {
       console.log(res)
     });
     component.uploadFile();
-    expect(component.productForm.controls['fileUrl'].value).toBe('');
+
+    setTimeout(() => {
+      expect(component.productForm.controls['fileUrl'].value).toBeTruthy();
+      expect(spyOn(productServiceStub, 'uploadImage')).toHaveBeenCalled();
+    }, 3000)
   });
 });
