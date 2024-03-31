@@ -31,8 +31,8 @@ export class AddEditComponent implements OnInit {
   private productService = inject(ProductService);
   private dialogService = inject(DialogService);
   private _snackBar = inject(MatSnackBar);
+  private data: { title: string; product?: ListProduct } = inject(MAT_DIALOG_DATA);
   
-  data: { title: string; product?: ListProduct } = inject(MAT_DIALOG_DATA);
   uploadStatus = uploadStatus;
   imageUploading!: uploadStatus;
   imageUploadedMessage!: string;
