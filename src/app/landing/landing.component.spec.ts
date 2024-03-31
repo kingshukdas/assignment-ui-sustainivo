@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../shared/login.service';
 import { ProductService } from '../shared/product.service';
 import { of } from 'rxjs';
+import { ListProductResponse } from '../shared/app.model';
 
 const productList = [{
   "product_id": "4",
@@ -29,6 +30,12 @@ const getProductsResponseMock = {
   "products": productList
 }
 
+class productServiceStub {
+  getAllProducts() { 
+    return of(getProductsResponseMock as ListProductResponse)
+  }
+}
+
 describe('LandingComponent', () => {
   let component: LandingComponent;
   let fixture: ComponentFixture<LandingComponent>;
@@ -37,8 +44,9 @@ describe('LandingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [LandingComponent],
-      providers: [provideAnimations()
-    ]
+      providers: [provideAnimations(), LoginService, 
+        {provide: ProductService, useClass: productServiceStub}
+      ]
     })
     .compileComponents();
     
@@ -69,7 +77,7 @@ describe('LandingComponent', () => {
     const data = {
       title: 'Add new product'
     };
-    const handleSpy = spyOn(component, 'handleDialogToggle');
+    const handleSpy = spyOn(component, 'handleDialogToggle').and.callThrough();
     component.addProduct();
     expect(handleSpy).toHaveBeenCalledWith(data);
   });
@@ -126,5 +134,13 @@ describe('LandingComponent', () => {
     const navigateSpy = spyOn(router, 'navigate');
     component.logout();
     expect(navigateSpy).toHaveBeenCalled();
-  })
+  });
+
+  it('On init users should be loaded', () => {
+    component.getProductsList(); 
+    setTimeout(() => {
+      expect(component.productList.length).toEqual(2);
+    },3000)
+  });
 });
+
