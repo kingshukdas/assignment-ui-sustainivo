@@ -48,8 +48,8 @@ export class RegisterComponent implements OnInit{
   }
 
   submit() {
-    if(this.registrationForm.controls['password']?.untouched || this.registrationForm.controls['email']?.untouched 
-    || this.registrationForm.controls['username']?.untouched || this.registrationForm.controls['repassword']?.untouched) {
+    if(!this.registrationForm.controls['password']?.value || !this.registrationForm.controls['email']?.value 
+    || !this.registrationForm.controls['username']?.value || !this.registrationForm.controls['repassword']?.value) {
       this.showInvalidDataMsg = true;
       this.errorMsg = 'Please fill all empty fields.';
       return;
