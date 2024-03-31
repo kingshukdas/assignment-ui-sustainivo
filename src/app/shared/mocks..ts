@@ -1,3 +1,9 @@
+import { of } from "rxjs";
+import { ListProductResponse } from "./app.model";
+import { ProductService } from "./product.service";
+import { HttpClient } from "@angular/common/http";
+import { TestBed, inject } from "@angular/core/testing";
+
 export const productList = [{
     "product_id": "4",
     "product_name": "Himalaya",
@@ -53,6 +59,25 @@ export const updateProductResponseMock = {
     "status": "success",
     "message": "Product updated successfully"
 };
+
+export const productServiceStub = {
+
+  getAllProducts(payload: any) { 
+    return of(getProductsResponseMock as ListProductResponse)
+  },
+
+  uploadImage(payload: any) {
+    return of(uploadResMock);
+  },
+
+  addProduct(payload: any) {
+    return of(addProductResponseMock);
+  },
+
+  updateProduct(payload: any) {
+    return of(updateProductResponseMock);
+  }
+}
 
 
   

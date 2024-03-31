@@ -69,7 +69,6 @@ export class AddEditComponent implements OnInit {
         this.showError = true;
         this.errorMsg = "Enter the price in range"
       } else {
-        if(this.productForm.valid) {
           if(this.data.product) {
             const payload: UpdateProductPayload = {
               update_product: true,
@@ -94,13 +93,8 @@ export class AddEditComponent implements OnInit {
             this.productService.addProduct(payload).subscribe((res: AddProductResponse) => {
               this.openSnackBar(res.message);
               this.dialogService.closeDialogSubject.next();
-
-            })
+            });
           }
-        } else {
-          this.showError = true;
-          this.errorMsg = "Invalid data provided";
-        }
       } 
     } else {
       this.showError = true;
