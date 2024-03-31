@@ -20,6 +20,7 @@ import { DialogService } from '../shared/dialog.service';
 export class LandingComponent implements OnInit{
   gridColumns = 4;
   load = true;
+  error = false;
   sortControl = new FormControl('ascending');
   masterProductList!: ListProduct[];
   productList!: ListProduct[];
@@ -40,6 +41,8 @@ export class LandingComponent implements OnInit{
       this.productList = res.products;
       this.masterProductList = res.products;
       this.sortProducts(this.sortControl.value as string);
+    }, err => {
+      this.error = true;
     });
   }
 
